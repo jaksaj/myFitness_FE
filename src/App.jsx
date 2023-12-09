@@ -1,25 +1,23 @@
-import { useState } from 'react'
-import FormaUnosReg from './components/FormaUnosReg'
+import FormRegistration from './components/FormRegistration'
+import FormSignIn from './components/FormSignIn'
 import './App.css'
-import FormaUnosSig from './components/FormaUnosSig'
-import { BrowserRouter, Routes, Route, Link, Outlet} from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 function App() {
   
   return (
     <BrowserRouter>
       <div>
-        
         <Routes>
-            <Route path="/login" Component={FormaUnosSig} />
-            <Route path="/register/*" Component={FormaUnosReg} />
+            <Route path="/login" Component={FormSignIn} />
+            <Route path="/register" Component={FormRegistration} />
         </Routes>
         <nav>
           <ul>
             <li>
-              <Link to="/login">Prijavi se</Link>
+              <Link to="/login">Log in!</Link>
             </li>
             <li>
-              <Link to="/register">Registriraj se</Link>
+              <Link to="/register">Register!</Link>
             </li>
           </ul>
         </nav>
@@ -27,5 +25,5 @@ function App() {
     </BrowserRouter>
   )
 }
-//triba vidit kako da kad stisnemo na route zapravo preusmjeri na tu komponentu, sada je samo doda
+
 export default App
