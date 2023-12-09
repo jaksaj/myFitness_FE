@@ -1,35 +1,31 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import FormaUnosReg from './components/FormaUnosReg'
 import './App.css'
-
+import FormaUnosSig from './components/FormaUnosSig'
+import { BrowserRouter, Routes, Route, Link, Outlet} from 'react-router-dom'
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
-    <>
+    <BrowserRouter>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        
+        <Routes>
+            <Route path="/login" Component={FormaUnosSig} />
+            <Route path="/register/*" Component={FormaUnosReg} />
+        </Routes>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/login">Prijavi se</Link>
+            </li>
+            <li>
+              <Link to="/register">Registriraj se</Link>
+            </li>
+          </ul>
+        </nav>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </BrowserRouter>
   )
 }
-
+//triba vidit kako da kad stisnemo na route zapravo preusmjeri na tu komponentu, sada je samo doda
 export default App
