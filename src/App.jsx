@@ -2,6 +2,7 @@ import FormRegistration from './components/FormRegistration'
 import FormSignIn from './components/FormSignIn'
 import './App.css'
 import { BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import HomePage from './components/HomePage'
 function App() {
   
   return (
