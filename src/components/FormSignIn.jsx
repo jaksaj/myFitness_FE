@@ -1,6 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import api from "../axiosConfig";
 function FormSignIn() {
   const [signInData, setSignInData] = useState({
     email: "",
@@ -34,10 +34,7 @@ function FormSignIn() {
   const signInUser = async (userData) => {
     console.log(userData);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/users/login",
-        { userData }
-      );
+      const response = await api.post("/users/login", { userData });
 
       if (response.status === 200) {
         console.log("Log in complete!", response.data);
@@ -47,6 +44,17 @@ function FormSignIn() {
       }
     } catch (error) {
       console.error("Error with sign in!", error);
+    }
+  };
+  const testToken = async () => {
+    try {
+      const response = await api.post("/trainingPrograms", {
+        name: "ale",
+        type: "PPL",
+      });
+      console.log(response);
+    } catch (error) {
+      console.error("Error!", error);
     }
   };
   return (
@@ -86,6 +94,9 @@ function FormSignIn() {
       <p>
         You do not have a account? <Link to={"/register"}>Register!</Link>
       </p>
+      <button type="button" onClick={testToken}>
+        TEST BUTTON
+      </button>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import api from "../axiosConfig";
 function FormRegistration() {
   const [registrationData, setRegistrationData] = useState({
     username: "",
@@ -41,10 +41,7 @@ function FormRegistration() {
   }
   const registerUser = async (userData) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/users",
-        userData
-      );
+      const response = await api.post("/users/register", userData);
       console.log(response);
       if (response.status === 200) {
         console.log("Registration successful!", response.data);
