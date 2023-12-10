@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import api from "../axiosConfig";
 function FormSignIn() {
+  const navigate = useNavigate();
   const [signInData, setSignInData] = useState({
     email: "",
     password: "",
@@ -39,22 +40,12 @@ function FormSignIn() {
       if (response.status === 200) {
         console.log("Log in complete!", response.data);
         localStorage.setItem("token", response.data.token);
+        navigate("/home");
       } else {
         console.error("Error with sign in!", response.data);
       }
     } catch (error) {
       console.error("Error with sign in!", error);
-    }
-  };
-  const testToken = async () => {
-    try {
-      const response = await api.post("/trainingPrograms", {
-        name: "ale",
-        type: "PPL",
-      });
-      console.log(response);
-    } catch (error) {
-      console.error("Error!", error);
     }
   };
   return (
@@ -94,9 +85,6 @@ function FormSignIn() {
       <p>
         You do not have a account? <Link to={"/register"}>Register!</Link>
       </p>
-      <button type="button" onClick={testToken}>
-        TEST BUTTON
-      </button>
     </>
   );
 }

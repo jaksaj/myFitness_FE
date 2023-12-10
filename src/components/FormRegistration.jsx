@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from "../axiosConfig";
 function FormRegistration() {
+  const navigate = useNavigate();
   const [registrationData, setRegistrationData] = useState({
     username: "",
     email: "",
@@ -10,7 +11,6 @@ function FormRegistration() {
   const [isUsernameValid, changeIsUsernameValid] = useState(true);
   const [isEmailValid, changeIsEmailValid] = useState(true);
   const [isPasswordValid, changeIsPasswordValid] = useState(true);
-
   const handleRegistration = async (event) => {
     event.preventDefault();
 
@@ -46,6 +46,7 @@ function FormRegistration() {
       if (response.status === 200) {
         console.log("Registration successful!", response.data);
         localStorage.setItem("token", response.data.token);
+        navigate("/home");
       } else {
         console.error("Error during registration!", response.data);
       }
