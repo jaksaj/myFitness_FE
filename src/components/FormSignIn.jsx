@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import { useNavigate, Link } from "react-router-dom";
 import api from "../axiosConfig";
 function FormSignIn() {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ function FormSignIn() {
       if (response.status === 200) {
         console.log("Log in complete!", response.data);
         localStorage.setItem("token", response.data.token);
-        navigate("/home")
+        navigate("/home");
       } else {
         console.error("Error with sign in!", response.data);
       }
@@ -85,9 +85,6 @@ function FormSignIn() {
       <p>
         You do not have a account? <Link to={"/register"}>Register!</Link>
       </p>
-      <button type="button" onClick={testToken}>
-        TEST BUTTON
-      </button>
     </>
   );
 }

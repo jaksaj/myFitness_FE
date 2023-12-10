@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Routes } from 'react-router-dom'
-import HomePage from "./HomePage";
+import { useNavigate } from "react-router-dom";
 import api from "../axiosConfig";
 function FormRegistration() {
   const navigate = useNavigate();
@@ -47,7 +46,7 @@ function FormRegistration() {
       if (response.status === 200) {
         console.log("Registration successful!", response.data);
         localStorage.setItem("token", response.data.token);
-        navigate("/home")
+        navigate("/home");
       } else {
         console.error("Error during registration!", response.data);
       }
@@ -55,7 +54,7 @@ function FormRegistration() {
       console.error("Error during registration!", error);
     }
   };
-  
+
   return (
     <>
       <form onSubmit={handleRegistration}>
