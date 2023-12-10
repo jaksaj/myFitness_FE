@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate, BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import HomePage from "./HomePage";
 function FormSignIn() {
+  const navigate = useNavigate();
   const [signInData, setSignInData] = useState({
     email: "",
     password: "",
@@ -42,6 +44,7 @@ function FormSignIn() {
       if (response.status === 200) {
         console.log("Log in complete!", response.data);
         localStorage.setItem("token", response.data.token);
+        navigate("/home")
       } else {
         console.error("Error with sign in!", response.data);
       }
@@ -49,6 +52,7 @@ function FormSignIn() {
       console.error("Error with sign in!", error);
     }
   };
+ 
   return (
     <>
       <form onSubmit={handleSignIn}>

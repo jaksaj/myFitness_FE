@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate, Routes, Route, Link} from 'react-router-dom'
+import HomePage from "./HomePage";
 function FormRegistration() {
+  const navigate = useNavigate();
   const [registrationData, setRegistrationData] = useState({
     username: "",
     email: "",
@@ -10,7 +12,6 @@ function FormRegistration() {
   const [isUsernameValid, changeIsUsernameValid] = useState(true);
   const [isEmailValid, changeIsEmailValid] = useState(true);
   const [isPasswordValid, changeIsPasswordValid] = useState(true);
-
   const handleRegistration = async (event) => {
     event.preventDefault();
 
@@ -49,6 +50,7 @@ function FormRegistration() {
       if (response.status === 200) {
         console.log("Registration successful!", response.data);
         localStorage.setItem("token", response.data.token);
+        navigate("/home")
       } else {
         console.error("Error during registration!", response.data);
       }
@@ -56,7 +58,7 @@ function FormRegistration() {
       console.error("Error during registration!", error);
     }
   };
-
+  
   return (
     <>
       <form onSubmit={handleRegistration}>
