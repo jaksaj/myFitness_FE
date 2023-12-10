@@ -1,7 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate, BrowserRouter, Routes, Route, Link} from 'react-router-dom'
-import HomePage from "./HomePage";
+import api from "../axiosConfig";
 function FormSignIn() {
   const navigate = useNavigate();
   const [signInData, setSignInData] = useState({
@@ -36,10 +35,7 @@ function FormSignIn() {
   const signInUser = async (userData) => {
     console.log(userData);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/users/login",
-        { userData }
-      );
+      const response = await api.post("/users/login", { userData });
 
       if (response.status === 200) {
         console.log("Log in complete!", response.data);
@@ -52,7 +48,6 @@ function FormSignIn() {
       console.error("Error with sign in!", error);
     }
   };
- 
   return (
     <>
       <form onSubmit={handleSignIn}>
@@ -90,6 +85,9 @@ function FormSignIn() {
       <p>
         You do not have a account? <Link to={"/register"}>Register!</Link>
       </p>
+      <button type="button" onClick={testToken}>
+        TEST BUTTON
+      </button>
     </>
   );
 }

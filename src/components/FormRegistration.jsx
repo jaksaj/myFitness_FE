@@ -1,7 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
-import { useNavigate, Routes, Route, Link} from 'react-router-dom'
+import { useNavigate, Routes } from 'react-router-dom'
 import HomePage from "./HomePage";
+import api from "../axiosConfig";
 function FormRegistration() {
   const navigate = useNavigate();
   const [registrationData, setRegistrationData] = useState({
@@ -42,10 +42,7 @@ function FormRegistration() {
   }
   const registerUser = async (userData) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/users",
-        userData
-      );
+      const response = await api.post("/users/register", userData);
       console.log(response);
       if (response.status === 200) {
         console.log("Registration successful!", response.data);
