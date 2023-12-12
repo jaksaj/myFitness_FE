@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import api from "../axiosConfig";
+import "./Register.css";
+
 function FormRegistration() {
   const navigate = useNavigate();
   const [registrationData, setRegistrationData] = useState({
@@ -57,9 +59,17 @@ function FormRegistration() {
 
   return (
     <>
-      <form onSubmit={handleRegistration}>
+      <form onSubmit={handleRegistration} id="form_reg">
         <div>
-          <label>
+          <div id="header">
+            <h1 id="welcome" style={{ color: "white" }}>
+              Welcome to
+            </h1>
+            <h1 id="logo">myFitness</h1>
+          </div>
+        </div>
+        <div>
+          <label id="label1">
             Username:
             <input
               type="text"
@@ -67,12 +77,13 @@ function FormRegistration() {
               value={registrationData.username}
               onChange={inputChange}
               required
+              id="input_reg1"
             />
           </label>
           <div style={{ color: "red" }}>
             {!isUsernameValid && "Username can not be shorter than 4 units!"}
           </div>
-          <label>
+          <label id="label2">
             Email:
             <input
               type="email"
@@ -80,12 +91,13 @@ function FormRegistration() {
               value={registrationData.email}
               onChange={inputChange}
               required
+              id="input2"
             />
           </label>
           <div style={{ color: "red" }}>
             {!isEmailValid && "This is not a valid email address"}
           </div>
-          <label>
+          <label label3="label3">
             Password:
             <input
               type="password"
@@ -93,6 +105,7 @@ function FormRegistration() {
               value={registrationData.password}
               onChange={inputChange}
               required
+              id="input3"
             />
           </label>
           <div style={{ color: "red" }}>
@@ -100,7 +113,9 @@ function FormRegistration() {
           </div>
         </div>
 
-        <button type="submit">Register!</button>
+        <button type="submit" className="button">
+          Register!
+        </button>
       </form>
       <p>
         You already have a account?<Link to={"/login"}>Sign in.</Link>

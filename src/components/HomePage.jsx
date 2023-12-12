@@ -2,6 +2,7 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import FormCreateSplit from "./FormCreateSplit";
 import { useEffect, useState } from "react";
 import api from "../axiosConfig";
+import "./HomePage.css";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -33,24 +34,40 @@ function HomePage() {
       <Routes>
         <Route path="/create" Component={FormCreateSplit} />
       </Routes>
-      <h1>Welcome to myFitness</h1>
-      <p>Over here you can track your workout splits and add new ones!</p>
-      <p>To add new split click "+" below.</p>
-      <Link to={"/create"}>
-        <button>+</button>
-      </Link>
-      {trainingPrograms.length > 0 && (
-        <>
-          <h2>Your Training Programs:</h2>
-          <ul>
-            {trainingPrograms.map((program) => (
-              <li key={program._id}>
-                {program.name} - {program.type}
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+      <div className="home-page">
+        <div id="header">
+          <h1 id="welcome">Welcome to</h1>
+          <h1 id="logo">myFitness</h1>
+        </div>
+
+        <div id="content1">
+          <div id="text-section">
+            <p>
+              Track your workout splits <br></br>
+              and add new ones!
+            </p>
+
+            <Link to={"/create"}>
+              <button>ADD</button>
+            </Link>
+            <p>Click button to add new split.</p>
+          </div>
+          <div id="form-section">
+            {trainingPrograms.length > 0 && (
+              <>
+                <h2>Your Training Programs: </h2>
+                <ul>
+                  {trainingPrograms.map((program) => (
+                    <li key={program._id}>
+                      {program.name} - {program.type}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
     </>
   );
 }
