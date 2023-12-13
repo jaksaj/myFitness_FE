@@ -13,8 +13,7 @@
 }
 
 .home-page {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  display: flexbox;
 }
 
 #header {
@@ -27,8 +26,7 @@
 }
 
 #content1 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flexbox;
 }
 
 #text-section {
@@ -42,10 +40,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 85%;
 }
 
-#form-section {
-  margin-left: 20px;
-  padding: -15px;
+.unorderedList {
+  padding: 0;
 }
+/* TODO switch all css files to module */

@@ -3,6 +3,7 @@ import FormCreateSplit from "./FormCreateSplit";
 import { useEffect, useState } from "react";
 import api from "../axiosConfig";
 import "./HomePage.css";
+import TrainingProgramItem from "./TrainingProgramItem";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -56,11 +57,9 @@ function HomePage() {
             {trainingPrograms.length > 0 && (
               <>
                 <h2>Your Training Programs: </h2>
-                <ul>
+                <ul className="unorderedList">
                   {trainingPrograms.map((program) => (
-                    <li key={program._id}>
-                      {program.name} - {program.type}
-                    </li>
+                    <TrainingProgramItem key={program._id} program={program} />
                   ))}
                 </ul>
               </>
