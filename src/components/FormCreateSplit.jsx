@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
+import "./CreateSplit.css";
 
 function FormCreateSplit() {
   const navigate = useNavigate();
@@ -38,33 +39,38 @@ function FormCreateSplit() {
   };
 
   return (
-    <div>
-      <h2>Create a new training program!</h2>
-
+    <div className="box">
+      <h2 id="title">Create a new training program</h2>
+      
       <div>
-        <label>Training program name:</label>
+        <label className="label">Training program name</label>
         <input
           type="text"
           value={trainingName}
           onChange={handleTrainingNameChange}
           placeholder="Enter training name"
+          className="entrance"
         />
       </div>
 
-      <div>
-        <label>Select a split:</label>
-        <select onChange={handleSplitChange} value={selectedSplit}>
+      <div id="SplitChoice">
+        <label className="label">Select a split:</label>
+        <select
+          onChange={handleSplitChange}
+          value={selectedSplit}
+          className="select"
+        >
           <option value="PPL">PPL</option>
           <option value="Full_body">Full body</option>
           <option value="Upper_lower">Upper-Lower</option>
         </select>
       </div>
 
-      <button type="button" onClick={back}>
+      <button type="button" onClick={back} className="button" id="upper">
         BACK
       </button>
 
-      <button type="button" onClick={testToken}>
+      <button type="button" onClick={testToken} className="button">
         CREATE
       </button>
     </div>
