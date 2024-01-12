@@ -1,45 +1,49 @@
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
 import FormCreateSplit from "./FormCreateSplit";
 import { useEffect, useState } from "react";
 import api from "../axiosConfig";
 import "./HomePage.css";
 import TrainingProgramItem from "./TrainingProgramItem";
-import Exercise from "./Exercise";
+import Workout from "./Workout";
 import WorkoutItem from "./WorkoutItem"; 
 import HomePage from "./HomePage";
 function AddExercise(params) {
+  const {workoutId}=useParams();
   const navigate = useNavigate();
-  const [selectedExercise, setSelectedExercise] = useState("");
-  const [numberOfReps, setNumberOfReps] = useState("");
-  const [weightNumber, setWeightNumber] = useState("");
+  const [selectedExercise, setSelectedExercise] = useState("Bench");
+  const [reps, setReps] = useState("");
+  // const [weightNumber, setWeightNumber] = useState("");
   const handleExerciseChange = (e) => {
     const inputValue = e.target.value;
     setSelectedExercise(inputValue);
   };
-  const [numberOfSets, setNumberOfSets] = useState(1);
+  const [sets, setSets] = useState(1);
 
   const handleNumberOfSetsChange = (e) => {
     const newValue = parseInt(e.target.value, 10);
-    setNumberOfSets(newValue);
+    setSets(newValue);
   };
-  const handleWeightNumberChange = (e) => {
-    const newValue = parseInt(e.target.value, 10);
-    setWeightNumber(newValue);
-  };
+  // const handleWeightNumberChange = (e) => {
+  //   const newValue = parseInt(e.target.value, 10);
+  //   setWeightNumber(newValue);
+  // };
   const handleNumberOfRepsChange = (e) => {
     const newValue = parseInt(e.target.value, 10);
-    setNumberOfReps(newValue);
+    setReps(newValue);
   };
   const testToken = async () => {
     try {
-      const response = await api.post("/exercises", {
-        name: selectedExercise,
-        sets: numberOfSets,
-        reps: numberOfReps,
-        weight: weightNumber
+      const response = await api.post(`/exercises`, {
+        workoutId,
+        exerciseDetails:{
+          name: selectedExercise,
+          sets,
+          reps,
+        // weight: weightNumber
+        }
       });
       console.log(response);
-      navigate("/exercise")
+      navigate(-1);
     } catch (error) {
       console.error("Error!", error);
     }
@@ -56,19 +60,19 @@ function AddExercise(params) {
           value={selectedExercise}
           className="select"
         >
-          <option value="Push">Push</option>
-          <option value="Pull">Pull</option>
-          <option value="Legs">Legs</option>
+          <option value="Bench">Bench</option>
+          <option value="Squat">Squat</option>
+          <option value="Deadlift">Deadlift</option>
         </select>
         <label className="label">Select a number of sets:</label>
-        <input id="number" type="number" value={numberOfSets} onChange={handleNumberOfSetsChange}/>
+        <input id="number" type="number" value={sets} onChange={handleNumberOfSetsChange}/>
       
 
         <label className="label">Select a number of reps:</label>
-        <input id="number" type="number" value={numberOfReps} onChange={handleNumberOfRepsChange}/>
+        <input id="number" type="number" value={reps} onChange={handleNumberOfRepsChange}/>
 
-        <label className="label">Select a weight per every rep:</label>
-        <input id="number" type="number" value={weightNumber} onChange={handleWeightNumberChange}/>
+        {/* <label className="label">Select a weight per every rep:</label>
+        <input id="number" type="number" value={weightNumber} onChange={handleWeightNumberChange}/> */}
 
       </div>
 
@@ -78,7 +82,7 @@ function AddExercise(params) {
         ADD
       </button>
 
-      <button type="button" onClick = {() => navigate("/workout")}className="button" id="upper">
+      <button type="button" onClick = {() => navigate(-1)}className="button" id="upper">
         BACK
       </button>
 

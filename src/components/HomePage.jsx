@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import api from "../axiosConfig";
 import "./HomePage.css";
 import TrainingProgramItem from "./TrainingProgramItem";
-import Workout from "./AddWorkout";
+import TrainingProgram from "./TrainingProgram";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -34,8 +34,11 @@ function HomePage() {
   return (
     <>
       <Routes>
-        <Route path="/create" Component={FormCreateSplit} />
-        <Route path="/workout" Component={Workout} />
+        <Route path="create" Component={FormCreateSplit} />
+        <Route
+          path="trainingProgram/:programId/*"
+          element={<TrainingProgram />}
+        />
       </Routes>
       <div className="home-page">
         <div id="header">
