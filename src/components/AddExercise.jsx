@@ -11,8 +11,8 @@ function AddExercise(params) {
   const {workoutId}=useParams();
   const navigate = useNavigate();
   const [selectedExercise, setSelectedExercise] = useState("Bench");
-  const [reps, setReps] = useState("");
-  // const [weightNumber, setWeightNumber] = useState("");
+  const [reps, setReps] = useState(1);
+  const [availableExercise, setAvailableExercise] = useState([]);
   const handleExerciseChange = (e) => {
     const inputValue = e.target.value;
     setSelectedExercise(inputValue);
@@ -21,15 +21,19 @@ function AddExercise(params) {
 
   const handleNumberOfSetsChange = (e) => {
     const newValue = parseInt(e.target.value, 10);
-    setSets(newValue);
+    if (newValue > 0) {
+      setSets(newValue);
+    } else {
+      setSets(1);
+    }
   };
-  // const handleWeightNumberChange = (e) => {
-  //   const newValue = parseInt(e.target.value, 10);
-  //   setWeightNumber(newValue);
-  // };
   const handleNumberOfRepsChange = (e) => {
     const newValue = parseInt(e.target.value, 10);
-    setReps(newValue);
+    if (newValue > 0) {
+      setReps(newValue);
+    } else {
+      setReps(1);
+    }
   };
   const testToken = async () => {
     try {
@@ -39,7 +43,6 @@ function AddExercise(params) {
           name: selectedExercise,
           sets,
           reps,
-        // weight: weightNumber
         }
       });
       console.log(response);
@@ -48,31 +51,45 @@ function AddExercise(params) {
       console.error("Error!", error);
     }
   };
+  useEffect(() => {
+    fetchAvailableExercises();
+  }, [workoutId]);
 
+  const fetchAvailableExercises = async () => {
+    try {
+      console.log(workoutId)
+      const response = await api.get(`/exercises/${workoutId}`);
+      setAvailableExercise(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error("Error fetching exercises!", error);
+    }
+  };
   return (
     
     <div className="box">
       <h2 id="title">Add Exercise</h2>
-      <div id="SplitChoice">
+      <div >
         <label className="label">Select a exercise:</label>
+        <div >
         <select
           onChange={handleExerciseChange}
           value={selectedExercise}
           className="select"
         >
-          <option value="Bench">Bench</option>
-          <option value="Squat">Squat</option>
-          <option value="Deadlift">Deadlift</option>
+          {availableExercise.map((e) => (
+            <option key={e.id} value={e.name}>
+              {e.name}
+            </option>
+          ))}
         </select>
+      </div>
         <label className="label">Select a number of sets:</label>
         <input id="number" type="number" value={sets} onChange={handleNumberOfSetsChange}/>
       
 
         <label className="label">Select a number of reps:</label>
         <input id="number" type="number" value={reps} onChange={handleNumberOfRepsChange}/>
-
-        {/* <label className="label">Select a weight per every rep:</label>
-        <input id="number" type="number" value={weightNumber} onChange={handleWeightNumberChange}/> */}
 
       </div>
 

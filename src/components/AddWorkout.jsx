@@ -10,7 +10,8 @@ import HomePage from "./HomePage";
 function AddWorkout(params) {
   const navigate = useNavigate();
   const [workoutName, setWorkoutName] = useState("");
-  const [selectedWorkout, setSelectedWorkout] = useState("PUSH");
+  const [selectedWorkout, setSelectedWorkout] = useState("");
+  const [availableWorkout, setAvailableWorkouts] = useState([]);
   const { programId } = useParams();
 
   const handleWorkoutChange = (e) => {
@@ -20,6 +21,21 @@ function AddWorkout(params) {
   const handleWorkoutNameChange = (e) => {
     const inputValue = e.target.value;
     setWorkoutName(inputValue);
+  };
+
+  useEffect(() => {
+    fetchAvailableWorkouts();
+  }, [programId]);
+
+  const fetchAvailableWorkouts = async () => {
+    try {
+      console.log(programId)
+      const response = await api.get(`/workouts/${programId}`);
+      setAvailableWorkouts(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error("Error fetching workouts!", error);
+    }
   };
 
   const addWorkoutToTrainingProgram = async () => {
@@ -57,9 +73,11 @@ function AddWorkout(params) {
           value={selectedWorkout}
           className="select"
         >
-          <option value="PUSH">Push</option>
-          <option value="PULL">Pull</option>
-          <option value="LEGS">Legs</option>
+          {availableWorkout.map((w) => (
+            <option key={w.id} value={w.name}>
+              {w.name}
+            </option>
+          ))}
         </select>
       </div>
 
