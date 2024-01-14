@@ -1,9 +1,8 @@
-import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import FormCreateSplit from "./FormCreateSplit";
 import { useEffect, useState } from "react";
 import api from "../axiosConfig";
 import "./HomePage.css";
-import TrainingProgramItem from "./TrainingProgramItem";
 import AddWorkout from "./AddWorkout";
 import WorkoutItem from "./WorkoutItem";
 
@@ -11,7 +10,7 @@ function TrainingProgram() {
   const navigate = useNavigate();
   const { programId } = useParams();
   const queryParams = new URLSearchParams(location.search);
-  const type = queryParams.get('type');
+  const type = queryParams.get("type");
   const [workouts, setWorkouts] = useState([]);
 
   useEffect(() => {
@@ -48,8 +47,8 @@ function TrainingProgram() {
   return (
     <>
       <Routes>
-          <Route path="create" element={<FormCreateSplit />} />
-          <Route path="addworkout" element={<AddWorkout />} />
+        <Route path="create" element={<FormCreateSplit />} />
+        <Route path="addworkout" element={<AddWorkout />} />
       </Routes>
       <div className="home-page">
         <h3>YOUR WORKOUTS:</h3>
@@ -61,7 +60,12 @@ function TrainingProgram() {
                 <h2>Your Workouts: </h2>
                 <ul className="unorderedList">
                   {workouts.map((workout) => (
-                    <WorkoutItem key={workout._id} workout={workout} onDelete={handleDeleteWorkout} trainingProgramId={programId}  />
+                    <WorkoutItem
+                      key={workout._id}
+                      workout={workout}
+                      onDelete={handleDeleteWorkout}
+                      trainingProgramId={programId}
+                    />
                   ))}
                 </ul>
               </>
@@ -69,9 +73,14 @@ function TrainingProgram() {
           </div>
         </div>
         <button onClick={handleAddWorkoutClick}>+</button>
-        <button type="button" onClick={()=>navigate(-1)} className="button" id="upper">
-        BACK
-      </button>
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="button"
+          id="upper"
+        >
+          BACK
+        </button>
         <button
           type="button"
           onClick={() => navigate("/home")}

@@ -1,4 +1,4 @@
-import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ExerciseItem from "./ExerciseItem";
 import { useEffect, useState } from "react";
 import api from "../axiosConfig";
@@ -8,7 +8,7 @@ function Workout() {
   const [exercises, setExercises] = useState([]);
   const { workoutId } = useParams();
   const queryParams = new URLSearchParams(location.search);
-  const type = queryParams.get('type');
+  const type = queryParams.get("type");
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -32,7 +32,7 @@ function Workout() {
   }, []);
   const handleDeleteExercise = (deletedExerciseId) => {
     setExercises((prevExercise) =>
-    prevExercise.filter((exercise) => exercise._id !== deletedExerciseId)
+      prevExercise.filter((exercise) => exercise._id !== deletedExerciseId)
     );
   };
   return (
@@ -48,15 +48,25 @@ function Workout() {
               <h2>Your Exercises Programs: </h2>
               <ul className="unorderedList">
                 {exercises.map((exercise) => (
-                  <ExerciseItem key={exercise._id} exercise={exercise} workoutId={workoutId} onDelete={handleDeleteExercise} />
+                  <ExerciseItem
+                    key={exercise._id}
+                    exercise={exercise}
+                    workoutId={workoutId}
+                    onDelete={handleDeleteExercise}
+                  />
                 ))}
               </ul>
             </>
           )}
         </div>
-        <button type="button" onClick={()=>navigate(-1)} className="button" id="upper">
-        BACK
-      </button>
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="button"
+          id="upper"
+        >
+          BACK
+        </button>
       </div>
     </>
   );

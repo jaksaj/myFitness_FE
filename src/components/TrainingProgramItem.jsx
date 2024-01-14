@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./TrainingProgramItem.module.css";
 import { Link } from "react-router-dom";
 import api from "../axiosConfig";
+
 const TrainingProgramItem = ({ program, onDelete }) => {
   const handleDelete = async () => {
     try {
@@ -21,9 +22,7 @@ const TrainingProgramItem = ({ program, onDelete }) => {
         <h3>{program.name}</h3>
         <p>Type: {program.type}</p>
       </Link>
-      <button onClick={handleDelete}>
-          Delete
-      </button>
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 };

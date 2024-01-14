@@ -68,7 +68,11 @@ function HomePage() {
                 <h2>Your Training Programs: </h2>
                 <ul className="unorderedList">
                   {trainingPrograms.map((program) => (
-                    <TrainingProgramItem key={program._id} program={program} onDelete={handleDeleteTrainingProgram} />
+                    <TrainingProgramItem
+                      key={program._id}
+                      program={program}
+                      onDelete={handleDeleteTrainingProgram}
+                    />
                   ))}
                 </ul>
               </>

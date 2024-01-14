@@ -1,32 +1,28 @@
-import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
-import FormCreateSplit from "./FormCreateSplit";
-import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 import api from "../axiosConfig";
 import "./HomePage.css";
-import TrainingProgramItem from "./TrainingProgramItem";
-import Exercise from "./AddExercise";
-import WorkoutItem from "./WorkoutItem";
-import HomePage from "./HomePage";
+import { WorkoutType, TrainingProgramType } from "../constants";
 function AddWorkout() {
   const navigate = useNavigate();
   const [workoutName, setWorkoutName] = useState("");
   const [selectedWorkout, setSelectedWorkout] = useState("");
   const { programId } = useParams();
   const queryParams = new URLSearchParams(location.search);
-  const type = queryParams.get('type');
+  const type = queryParams.get("type");
   const availableWorkoutTypes = (() => {
     switch (type) {
-      case "PPL":
-        return ["PUSH", "PULL", "LEGS"];
-      case "Upper_lower":
-        return ["UPPER", "LOWER"];
-      case "Full_body":
-        return ["Full_body"];
+      case TrainingProgramType.PPL:
+        return [WorkoutType.PUSH, WorkoutType.PULL, WorkoutType.LEGS];
+      case TrainingProgramType.UPPER_LOWER:
+        return [WorkoutType.UPPER, WorkoutType.LOWER];
+      case TrainingProgramType.FULL_BODY:
+        return [WorkoutType.FULL_BODY];
       default:
         return [];
     }
   })();
-  
+
   const handleWorkoutChange = (e) => {
     const inputValue = e.target.value;
     setSelectedWorkout(inputValue);
@@ -39,13 +35,11 @@ function AddWorkout() {
   const addWorkoutToTrainingProgram = async () => {
     try {
       const trainingProgramId = programId;
-      if (selectedWorkout.length<1) {
-        setSelectedWorkout(()=>availableWorkoutTypes[0]);
-      }
-
-      const response = await api.post("/workouts", {
+      const type =
+        selectedWorkout.length > 1 ? selectedWorkout : availableWorkoutTypes[0];
+      await api.post("/workouts", {
         trainingProgramId,
-        workoutDetails: { name: workoutName, type: selectedWorkout },
+        workoutDetails: { name: workoutName, type },
       });
       navigate(-1);
     } catch (error) {

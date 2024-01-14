@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
 import "./CreateSplit.css";
+import { TrainingProgramType } from "../constants";
 
 function FormCreateSplit() {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ function FormCreateSplit() {
   return (
     <div className="box">
       <h2 id="title">Create a new training program</h2>
-      
+
       <div>
         <label className="label">Training program name</label>
         <input
@@ -59,9 +60,9 @@ function FormCreateSplit() {
           value={selectedSplit}
           className="select"
         >
-          <option value="PPL">PPL</option>
-          <option value="Full_body">Full body</option>
-          <option value="Upper_lower">Upper-Lower</option>
+          <option value={TrainingProgramType.PPL}>PPL</option>
+          <option value={TrainingProgramType.FULL_BODY}>FULL BODY</option>
+          <option value={TrainingProgramType.UPPER_LOWER}>UPPER LOWER</option>
         </select>
       </div>
 
