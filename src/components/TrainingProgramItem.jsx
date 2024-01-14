@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./TrainingProgramItem.module.css";
+import { Link } from "react-router-dom";
 
 const TrainingProgramItem = ({ program }) => {
   return (
-    <a href="#">
-      <div className={styles.programItem}>
+    <div className={styles.programItem}>
+      <Link to={`trainingProgram/${program._id}`}>
         <h3>{program.name}</h3>
         <p>Type: {program.type}</p>
-      </div>
-    </a>
+      </Link>
+    </div>
   );
 };
 
