@@ -13,7 +13,7 @@ function AddWorkout(params) {
   const [selectedWorkout, setSelectedWorkout] = useState("");
   const [availableWorkout, setAvailableWorkouts] = useState([]);
   const { programId } = useParams();
-
+  
   const handleWorkoutChange = (e) => {
     const inputValue = e.target.value;
     setSelectedWorkout(inputValue);

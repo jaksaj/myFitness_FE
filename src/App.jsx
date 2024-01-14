@@ -24,7 +24,7 @@ function App() {
           <Route path="home/trainingProgram/:programId/workout/:workoutId/addexercise" Component={AddExercise} />
           <Route path="/addexercise" Component={AddExercise}/>
         </Routes>
-        {/* <FormRegistration></FormRegistration> */}
+         {/* <FormRegistration></FormRegistration>  */}
       </div>
     </BrowserRouter>
   );

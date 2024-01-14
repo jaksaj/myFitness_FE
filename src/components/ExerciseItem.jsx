@@ -5,6 +5,7 @@ function ExerciseItem(program) {
                 <h3>Exercise: {program.program.name}</h3>
                 <p>Sets: {program.program.sets}</p>
                 <p>Reps: {program.program.reps}</p>
+                
             </div>
         </div>
     )
