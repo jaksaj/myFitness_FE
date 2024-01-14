@@ -7,7 +7,7 @@ import TrainingProgramItem from "./TrainingProgramItem";
 import Exercise from "./AddExercise";
 import WorkoutItem from "./WorkoutItem";
 import HomePage from "./HomePage";
-function AddWorkout(params) {
+function AddWorkout() {
   const navigate = useNavigate();
   const [workoutName, setWorkoutName] = useState("");
   const [selectedWorkout, setSelectedWorkout] = useState("");

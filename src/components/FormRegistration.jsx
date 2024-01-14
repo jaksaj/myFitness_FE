@@ -44,9 +44,7 @@ function FormRegistration() {
   const registerUser = async (userData) => {
     try {
       const response = await api.post("/users/register", userData);
-      console.log(response);
       if (response.status === 200) {
-        console.log("Registration successful!", response.data);
         localStorage.setItem("token", response.data.token);
         navigate("/home");
       } else {

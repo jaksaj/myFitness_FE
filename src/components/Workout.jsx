@@ -9,7 +9,6 @@ function Workout() {
   const { workoutId } = useParams();
   const queryParams = new URLSearchParams(location.search);
   const type = queryParams.get('type');
-  console.log(type)
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -31,6 +30,11 @@ function Workout() {
     };
     fetchExercises();
   }, []);
+  const handleDeleteExercise = (deletedExerciseId) => {
+    setExercises((prevExercise) =>
+    prevExercise.filter((exercise) => exercise._id !== deletedExerciseId)
+    );
+  };
   return (
     <>
       <h3>YOUR EXERCISES:</h3>
@@ -43,8 +47,8 @@ function Workout() {
             <>
               <h2>Your Exercises Programs: </h2>
               <ul className="unorderedList">
-                {exercises.map((program) => (
-                  <ExerciseItem key={program._id} program={program} />
+                {exercises.map((exercise) => (
+                  <ExerciseItem key={exercise._id} exercise={exercise} workoutId={workoutId} onDelete={handleDeleteExercise} />
                 ))}
               </ul>
             </>

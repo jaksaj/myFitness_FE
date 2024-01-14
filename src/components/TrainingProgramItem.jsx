@@ -8,7 +8,6 @@ const TrainingProgramItem = ({ program, onDelete }) => {
       const response = await api.delete(`/trainingPrograms/${program._id}`);
       if (response.status === 200) {
         onDelete(program._id);
-        console.log("Training program deleted successfully!");
       } else {
         console.error("Error deleting training program:", response);
       }

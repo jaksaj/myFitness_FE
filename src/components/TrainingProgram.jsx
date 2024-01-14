@@ -12,7 +12,6 @@ function TrainingProgram() {
   const { programId } = useParams();
   const queryParams = new URLSearchParams(location.search);
   const type = queryParams.get('type');
-  console.log(type);
   const [workouts, setWorkouts] = useState([]);
 
   useEffect(() => {
@@ -36,6 +35,11 @@ function TrainingProgram() {
 
     fetchWorkouts();
   }, [navigate]);
+  const handleDeleteWorkout = (deletedWorkoutId) => {
+    setWorkouts((prevWorkouts) =>
+      prevWorkouts.filter((workout) => workout._id !== deletedWorkoutId)
+    );
+  };
 
   const handleAddWorkoutClick = () => {
     navigate(`addworkout?type=${type}`);
@@ -57,7 +61,7 @@ function TrainingProgram() {
                 <h2>Your Workouts: </h2>
                 <ul className="unorderedList">
                   {workouts.map((workout) => (
-                    <WorkoutItem key={workout._id} program={workout} />
+                    <WorkoutItem key={workout._id} workout={workout} onDelete={handleDeleteWorkout} trainingProgramId={programId}  />
                   ))}
                 </ul>
               </>

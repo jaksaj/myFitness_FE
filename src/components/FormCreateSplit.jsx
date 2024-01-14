@@ -27,11 +27,10 @@ function FormCreateSplit() {
       return;
     }
     try {
-      const response = await api.post("/trainingPrograms", {
+      await api.post("/trainingPrograms", {
         name: trainingName,
         type: selectedSplit,
       });
-      console.log(response);
       back();
     } catch (error) {
       console.error("Error!", error);

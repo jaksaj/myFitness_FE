@@ -56,7 +56,7 @@ function AddExercise() {
   };
   const testToken = async () => {
     try {
-      const response = await api.post(`/exercises`, {
+      await api.post(`/exercises`, {
         workoutId,
         exerciseDetails: {
           name: selectedExercise,
@@ -64,7 +64,6 @@ function AddExercise() {
           reps,
         },
       });
-      console.log(response);
       navigate(-1);
     } catch (error) {
       console.error("Error!", error);
