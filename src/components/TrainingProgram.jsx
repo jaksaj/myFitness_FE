@@ -10,6 +10,9 @@ import WorkoutItem from "./WorkoutItem";
 function TrainingProgram() {
   const navigate = useNavigate();
   const { programId } = useParams();
+  const queryParams = new URLSearchParams(location.search);
+  const type = queryParams.get('type');
+  console.log(type);
   const [workouts, setWorkouts] = useState([]);
 
   useEffect(() => {
@@ -35,7 +38,7 @@ function TrainingProgram() {
   }, [navigate]);
 
   const handleAddWorkoutClick = () => {
-    navigate(`addworkout`);
+    navigate(`addworkout?type=${type}`);
   };
 
   return (
@@ -62,6 +65,9 @@ function TrainingProgram() {
           </div>
         </div>
         <button onClick={handleAddWorkoutClick}>+</button>
+        <button type="button" onClick={()=>navigate(-1)} className="button" id="upper">
+        BACK
+      </button>
         <button
           type="button"
           onClick={() => navigate("/home")}

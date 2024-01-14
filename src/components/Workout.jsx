@@ -3,10 +3,13 @@ import ExerciseItem from "./ExerciseItem";
 import { useEffect, useState } from "react";
 import api from "../axiosConfig";
 
-function Workout(params) {
+function Workout() {
   const navigate = useNavigate();
   const [exercises, setExercises] = useState([]);
   const { workoutId } = useParams();
+  const queryParams = new URLSearchParams(location.search);
+  const type = queryParams.get('type');
+  console.log(type)
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -32,7 +35,7 @@ function Workout(params) {
     <>
       <h3>YOUR EXERCISES:</h3>
       <div>
-        <Link to={"addexercise"}>
+        <Link to={`addexercise?type=${type}`}>
           <button>ADD EXERCISE</button>
         </Link>
         <div id="form-section">
@@ -47,6 +50,9 @@ function Workout(params) {
             </>
           )}
         </div>
+        <button type="button" onClick={()=>navigate(-1)} className="button" id="upper">
+        BACK
+      </button>
       </div>
     </>
   );

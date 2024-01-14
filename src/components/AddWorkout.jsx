@@ -11,8 +11,21 @@ function AddWorkout(params) {
   const navigate = useNavigate();
   const [workoutName, setWorkoutName] = useState("");
   const [selectedWorkout, setSelectedWorkout] = useState("");
-  const [availableWorkout, setAvailableWorkouts] = useState([]);
   const { programId } = useParams();
+  const queryParams = new URLSearchParams(location.search);
+  const type = queryParams.get('type');
+  const availableWorkoutTypes = (() => {
+    switch (type) {
+      case "PPL":
+        return ["PUSH", "PULL", "LEGS"];
+      case "Upper_lower":
+        return ["UPPER", "LOWER"];
+      case "Full_body":
+        return ["Full_body"];
+      default:
+        return [];
+    }
+  })();
   
   const handleWorkoutChange = (e) => {
     const inputValue = e.target.value;
@@ -23,25 +36,12 @@ function AddWorkout(params) {
     setWorkoutName(inputValue);
   };
 
-  useEffect(() => {
-    fetchAvailableWorkouts();
-  }, [programId]);
-
-  const fetchAvailableWorkouts = async () => {
-    try {
-      console.log(programId)
-      const response = await api.get(`/workouts/${programId}`);
-      setAvailableWorkouts(response.data);
-      console.log(response.data)
-    } catch (error) {
-      console.error("Error fetching workouts!", error);
-    }
-  };
-
   const addWorkoutToTrainingProgram = async () => {
     try {
-      // Assuming you have access to the trainingProgramId, replace it with the actual value
       const trainingProgramId = programId;
+      if (selectedWorkout.length<1) {
+        setSelectedWorkout(()=>availableWorkoutTypes[0]);
+      }
 
       const response = await api.post("/workouts", {
         trainingProgramId,
@@ -73,9 +73,9 @@ function AddWorkout(params) {
           value={selectedWorkout}
           className="select"
         >
-          {availableWorkout.map((w) => (
-            <option key={w.id} value={w.name}>
-              {w.name}
+          {availableWorkoutTypes.map((workoutType) => (
+            <option key={workoutType} value={workoutType}>
+              {workoutType}
             </option>
           ))}
         </select>

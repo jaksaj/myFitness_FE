@@ -18,7 +18,7 @@ const TrainingProgramItem = ({ program, onDelete }) => {
   };
   return (
     <div className={styles.programItem}>
-      <Link to={`trainingPrograms/${program._id}`}>
+      <Link to={`trainingProgram/${program._id}?type=${program.type}`}>
         <h3>{program.name}</h3>
         <p>Type: {program.type}</p>
       </Link>

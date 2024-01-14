@@ -6,7 +6,7 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 const WorkoutItem = ( workout, onDelete ) => {
   
   return (
-    <Link to={`workout/${workout.program._id}`}>
+    <Link to={`workout/${workout.program._id}?type=${workout.program.type}`}>
       <div>
           <Routes>
             <Route path="" />
