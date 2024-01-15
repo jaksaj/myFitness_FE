@@ -30,7 +30,11 @@ function HomePage() {
     };
     fetchTrainingPrograms();
   }, []);
-
+  const handleDeleteTrainingProgram = (deletedProgramId) => {
+    setTrainingPrograms((prevPrograms) =>
+      prevPrograms.filter((program) => program._id !== deletedProgramId)
+    );
+  };
   return (
     <>
       <Routes>
@@ -64,7 +68,11 @@ function HomePage() {
                 <h2>Your Training Programs: </h2>
                 <ul className="unorderedList">
                   {trainingPrograms.map((program) => (
-                    <TrainingProgramItem key={program._id} program={program} />
+                    <TrainingProgramItem
+                      key={program._id}
+                      program={program}
+                      onDelete={handleDeleteTrainingProgram}
+                    />
                   ))}
                 </ul>
               </>

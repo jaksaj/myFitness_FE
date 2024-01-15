@@ -35,12 +35,10 @@ function FormSignIn() {
   };
 
   const signInUser = async (userData) => {
-    console.log(userData);
     try {
       const response = await api.post("/users/login", { userData });
 
       if (response.status === 200) {
-        console.log("Log in complete!", response.data);
         localStorage.setItem("token", response.data.token);
         navigate("/home");
       } else {
