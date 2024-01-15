@@ -1,6 +1,7 @@
 import React from "react";
 import api from "../axiosConfig";
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./WorkoutItem.css";
 
 const WorkoutItem = ({ workout, onDelete, trainingProgramId }) => {
   const handleDelete = async () => {
@@ -10,7 +11,6 @@ const WorkoutItem = ({ workout, onDelete, trainingProgramId }) => {
       );
       if (response.status === 200) {
         onDelete(workout._id);
-        console.log("Workout deleted successfully!");
       } else {
         console.error("Error deleting training program:", response);
       }
@@ -19,17 +19,18 @@ const WorkoutItem = ({ workout, onDelete, trainingProgramId }) => {
     }
   };
   return (
-    <>
-      <Link to={`workout/${workout._id}?type=${workout.type}`}>
+    <div className="workoutItem">
+      <Link
+        to={`workout/${workout._id}?type=${workout.type}`}
+        className="linkNoColor"
+      >
         <div>
-          <Routes>
-            <Route path="" />
-          </Routes>
-          <h3>{workout.name}</h3>
+          <h2>{workout.name}</h2>
+          <p>Type: {workout.type}</p>
         </div>
       </Link>
       <button onClick={handleDelete}>Delete</button>
-    </>
+    </div>
   );
 };
 

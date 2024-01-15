@@ -1,4 +1,5 @@
 import api from "../axiosConfig";
+import "./ExerciseItem.css";
 
 function ExerciseItem({ exercise, workoutId, onDelete }) {
   const handleDelete = async () => {
@@ -16,7 +17,7 @@ function ExerciseItem({ exercise, workoutId, onDelete }) {
     }
   };
   return (
-    <div>
+    <div id="exercise-view">
       <div>
         <h3>Exercise: {exercise.name}</h3>
         <p>Sets: {exercise.sets}</p>

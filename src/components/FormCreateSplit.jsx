@@ -65,13 +65,11 @@ function FormCreateSplit() {
           <option value={TrainingProgramType.UPPER_LOWER}>UPPER LOWER</option>
         </select>
       </div>
-
-      <button type="button" onClick={back} className="button" id="upper">
-        BACK
-      </button>
-
       <button type="button" onClick={testToken} className="button">
         CREATE
+      </button>
+      <button type="button" onClick={back} className="button" id="upper">
+        BACK
       </button>
     </div>
   );

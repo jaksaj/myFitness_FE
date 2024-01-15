@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ExerciseItem from "./ExerciseItem";
 import { useEffect, useState } from "react";
 import api from "../axiosConfig";
+import "./Workout.css";
 
 function Workout() {
   const navigate = useNavigate();
@@ -37,15 +38,11 @@ function Workout() {
   };
   return (
     <>
-      <h3>YOUR EXERCISES:</h3>
-      <div>
-        <Link to={`addexercise?type=${type}`}>
-          <button>ADD EXERCISE</button>
-        </Link>
+      <div id="page-content">
+        <h3>YOUR EXERCISES:</h3>
         <div id="form-section">
           {exercises.length > 0 && (
             <>
-              <h2>Your Exercises Programs: </h2>
               <ul className="unorderedList">
                 {exercises.map((exercise) => (
                   <ExerciseItem
@@ -59,6 +56,9 @@ function Workout() {
             </>
           )}
         </div>
+        <Link to={`addexercise?type=${type}`}>
+          <button>ADD EXERCISE</button>
+        </Link>
         <button
           type="button"
           onClick={() => navigate(-1)}

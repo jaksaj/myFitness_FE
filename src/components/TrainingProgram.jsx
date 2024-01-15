@@ -1,9 +1,8 @@
-import { Routes, Route, useNavigate, useParams } from "react-router-dom";
-import FormCreateSplit from "./FormCreateSplit";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../axiosConfig";
 import "./HomePage.css";
-import AddWorkout from "./AddWorkout";
+import "./TrainingProgram.css";
 import WorkoutItem from "./WorkoutItem";
 
 function TrainingProgram() {
@@ -45,52 +44,40 @@ function TrainingProgram() {
   };
 
   return (
-    <>
-      <Routes>
-        <Route path="create" element={<FormCreateSplit />} />
-        <Route path="addworkout" element={<AddWorkout />} />
-      </Routes>
-      <div className="home-page">
-        <h3>YOUR WORKOUTS:</h3>
+    <div className="home-page">
+      <h3>YOUR WORKOUTS:</h3>
 
-        <div id="content1">
-          <div id="form-section">
-            {Array.isArray(workouts) && workouts.length > 0 && (
-              <>
-                <h2>Your Workouts: </h2>
-                <ul className="unorderedList">
-                  {workouts.map((workout) => (
-                    <WorkoutItem
-                      key={workout._id}
-                      workout={workout}
-                      onDelete={handleDeleteWorkout}
-                      trainingProgramId={programId}
-                    />
-                  ))}
-                </ul>
-              </>
-            )}
-          </div>
+      <div id="content1">
+        <div id="form-section">
+          {Array.isArray(workouts) && workouts.length > 0 && (
+            <>
+              <h2>Your Workouts: </h2>
+              <ul className="unorderedList">
+                {workouts.map((workout) => (
+                  <WorkoutItem
+                    key={workout._id}
+                    workout={workout}
+                    onDelete={handleDeleteWorkout}
+                    trainingProgramId={programId}
+                  />
+                ))}
+              </ul>
+            </>
+          )}
         </div>
-        <button onClick={handleAddWorkoutClick}>+</button>
-        <button
-          type="button"
-          onClick={() => navigate(-1)}
-          className="button"
-          id="upper"
-        >
-          BACK
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate("/home")}
-          className="button"
-          id="upper"
-        >
-          HOMEPAGE
-        </button>
       </div>
-    </>
+      <button id="plus" onClick={handleAddWorkoutClick}>
+        ADD WORKOUT
+      </button>
+      <button
+        type="button"
+        onClick={() => navigate(-1)}
+        className="button"
+        id="upper"
+      >
+        BACK
+      </button>
+    </div>
   );
 }
 
