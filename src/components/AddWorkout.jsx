@@ -33,6 +33,10 @@ function AddWorkout() {
   };
 
   const addWorkoutToTrainingProgram = async () => {
+    if (workoutName.length < 3) {
+      alert("Name too short");
+      return;
+    }
     try {
       const trainingProgramId = programId;
       const type =

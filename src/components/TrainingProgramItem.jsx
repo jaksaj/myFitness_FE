@@ -18,8 +18,11 @@ const TrainingProgramItem = ({ program, onDelete }) => {
   };
   return (
     <div className={styles.programItem}>
-      <Link to={`trainingProgram/${program._id}?type=${program.type}`}>
-        <h3>{program.name}</h3>
+      <Link
+        to={`trainingProgram/${program._id}?type=${program.type}`}
+        className={styles.linkNoColor}
+      >
+        <h2>{program.name}</h2>
         <p>Type: {program.type}</p>
       </Link>
       <button onClick={handleDelete}>Delete</button>

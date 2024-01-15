@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import api from "../axiosConfig";
-import "./HomePage.css";
+import "./AddExercise.css";
 import { WorkoutType, Exercise } from "../constants";
 function AddExercise() {
   const { workoutId } = useParams();

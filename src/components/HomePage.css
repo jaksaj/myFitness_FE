@@ -2,6 +2,7 @@
   font-family: "Bruno Ace SC", serif;
   font-weight: bolder;
   margin-top: 0.1em;
+  font-size: 80px;
 }
 
 #welcome {
@@ -14,6 +15,7 @@
 
 .home-page {
   display: flexbox;
+  width: 500px;
 }
 
 #header {
@@ -45,4 +47,3 @@
 .unorderedList {
   padding: 0;
 }
-/* TODO switch all css files to module */
